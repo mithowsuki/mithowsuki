@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cảnh Biển Động CSS3</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: url('../images/ocean1.gif') center/cover no-repeat;
+        position: relative;
+        font-family: sans-serif;
+    }
+    .controls { position: absolute; top: 10px; right: 10px; display: flex; gap: 10px; z-index: 50; }
+    .controls button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        transition: 0.3s;
+    }
+    .controls button:hover { transform: translateY(-2px); }
+
+    .character { position: absolute; transform-origin: center; user-select: none; pointer-events: none; z-index: 20; will-change: transform, left, top; }
+    #diver1, #diver2, #diver3 { width: 120px; z-index: 30; }
+    #shark { width: 450px; z-index: 25; }
+    #turtle { width: 120px; z-index: 28; }
+    .fish-school { width: 50px; position: absolute; pointer-events: none; z-index: 22; transform-origin: center; }
+    .faint-school { width: 120px; opacity: 0.6; } /* bọt biển */
+    img { display: block; max-width: none; }
+    @media (max-width: 640px) {
+        #shark { width: 300px; }
+        #diver1, #diver2, #diver3, #turtle { width: 90px; }
+        .fish-school { width: 35px; }
+        .faint-school { width: 80px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="controls">
+    <button id="changeBg">Đổi cảnh</button>
+    <button id="toggleMusic">🎵 Phát nhạc</button>
+</div>
+
+<img src="../images/diver1.png" class="character" id="diver1" style="top:50px; left:50px;" alt="diver1">
+<img src="../images/diver2.png" class="character" id="diver2" style="top:150px; left:200px;" alt="diver2">
+<img src="../images/diver3.png" class="character" id="diver3" style="top:250px; left:100px;" alt="diver3">
+<img src="../images/shark.png" class="character" id="shark" style="top:100px; left:500px;" alt="shark">
+<img src="../images/turtle.png" class="character" id="turtle" style="top:300px; left:700px;" alt="turtle">
+
+<audio id="bgMusic" loop>
+    <source src="../images/song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function applyRotateFacing(el, rotateDeg, facing) {
+    facing = (facing >= 0) ? 1 : -1;
+    el.style.transform = `rotate(${rotateDeg}deg) scaleX(${facing})`;
+}
+function parseInitialRotate(el) {
+    const t = el.style.transform || '';
+    const m = t.match(/rotate\(([-\d.]+)deg\)/);
+    return m ? parseFloat(m[1]) : 0;
+}
+
+const staticIds = ['diver1','diver2','diver3','shark','turtle'];
+staticIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const r = parseInitialRotate(el);
+    el.dataset.rotate = r;
+    el.dataset.facing = 1;
+    applyRotateFacing(el, r, parseInt(el.dataset.facing,10));
+});
+
+const characters = [];
+const goldFishCount = 12;
+const goldFishSrc = '../images/goldFishSchool.png';
+for (let i = 0; i < goldFishCount; i++) {
+    const fish = document.createElement('img');
+    fish.src = goldFishSrc;
+    fish.className = 'fish-school';
+    const pad = 20;
+    fish.style.top = (Math.random()*(window.innerHeight-pad*2)+pad)+'px';
+    fish.style.left = (Math.random()*(window.innerWidth-pad*2)+pad)+'px';
+    const w = 70 + Math.random()*20;
+    fish.style.width = w+'px';
+    const rotate = 0;
+    fish.dataset.rotate = rotate;
+    const facing = Math.random()<0.5?1:-1;
+    fish.dataset.facing = facing;
+    applyRotateFacing(fish, rotate, facing);
+    document.body.appendChild(fish);
+    const dx = (0.5 + Math.random()*1.5)*(Math.random()<0.5?-1:1);
+    const dy = (Math.random()-0.5)*0.5;
+    characters.push({el: fish, dx, dy});
+}
+
+const faintCount = 6;
+for(let i=0;i<faintCount;i++){
+    const faint = document.createElement('img');
+    faint.src = '../images/faintSchool.png';
+    faint.className = 'fish-school faint-school';
+    faint.style.top = (Math.random()*(window.innerHeight-50)+25)+'px';
+    faint.style.left = (Math.random()*(window.innerWidth-50)+25)+'px';
+    faint.dataset.rotate = 0;
+    faint.dataset.facing = 1;
+    applyRotateFacing(faint,0,1);
+    document.body.appendChild(faint);
+    characters.push({el:faint, dx:(Math.random()*0.2+0.1)*(Math.random()<0.5?-1:1), dy:(Math.random()-0.5)*0.05});
+}
+
+const diver1 = {el: document.getElementById('diver1'), dx: 0.6, dy: 0.3};
+const diver2 = {el: document.getElementById('diver2'), dx: 0.5, dy: 0.25};
+const diver3 = {el: document.getElementById('diver3'), dx: 0.55, dy: 0.35};
+const shark = {el: document.getElementById('shark'), dx: 2.3, dy: 0.8};
+const turtle = {el: document.getElementById('turtle'), dx: 0.25, dy: 0.15};
+characters.push(diver1, diver2, diver3, shark, turtle);
+
+let bodyWidth = window.innerWidth;
+let bodyHeight = window.innerHeight;
+window.addEventListener('resize', ()=>{ bodyWidth=window.innerWidth; bodyHeight=window.innerHeight; });
+
+function ensureFacing(obj){
+    const el = obj.el;
+    const dx = obj.dx || 0;
+    const desired = dx>=0?1:-1;
+    const current = parseInt(el.dataset.facing||'1',10);
+    if(desired!==current){
+        el.dataset.facing=desired;
+        applyRotateFacing(el,parseFloat(el.dataset.rotate||0),desired);
+    }
+}
+
+function moveCharacters(){
+    characters.forEach(obj=>{
+        if(!obj||!obj.el) return;
+        const el=obj.el;
+        const rect = el.getBoundingClientRect();
+        let x = rect.left + (obj.dx||0);
+        let y = rect.top + (obj.dy||0);
+        if(x<=0){ x=0; obj.dx=Math.abs(obj.dx||0); }
+        else if(x+rect.width>=bodyWidth){ x=bodyWidth-rect.width; obj.dx=-Math.abs(obj.dx||0); }
+        if(y<=0){ y=0; obj.dy=Math.abs(obj.dy||0); }
+        else if(y+rect.height>=bodyHeight){ y=bodyHeight-rect.height; obj.dy=-Math.abs(obj.dy||0); }
+        el.style.left = x+'px';
+        el.style.top = y+'px';
+        ensureFacing(obj);
+    });
+    requestAnimationFrame(moveCharacters);
+}
+requestAnimationFrame(moveCharacters);
+
+const backgrounds = ["../images/ocean1.gif","../images/ocean2.gif","../images/ocean3.gif"];
+let bgIndex=0;
+document.getElementById('changeBg').addEventListener('click', ()=>{
+    bgIndex=(bgIndex+1)%backgrounds.length;
+    document.body.style.backgroundImage=`url('${backgrounds[bgIndex]}')`;
+});
+
+const bgMusic=document.getElementById('bgMusic');
+const toggleBtn=document.getElementById('toggleMusic');
+
+function updateMusicButton(){
+    if(bgMusic.paused){
+        toggleBtn.textContent='🎵 Phát nhạc';
+        toggleBtn.style.background='rgba(255,255,255,0.8)';
+    } else {
+        toggleBtn.textContent='🔇 Tắt nhạc';
+        toggleBtn.style.background='linear-gradient(90deg, #ff758c, #ff7eb3)';
+    }
+}
+
+updateMusicButton();
+
+toggleBtn.addEventListener('click', ()=>{
+    if(bgMusic.paused) bgMusic.play().catch(()=>{});
+    else bgMusic.pause();
+    updateMusicButton();
+});
+
+bgMusic.addEventListener('pause', updateMusicButton);
+bgMusic.addEventListener('play', updateMusicButton);
+</script>
+
+
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
+    <a href="../index.html" style="
+        display: inline-block;
+        padding: 10px 16px;
+        background: linear-gradient(90deg, #ff758c, #ff7eb3);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    " onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+        ⬅️ Quay lại Trang Chủ
+    </a>
+</div>
+
+</body>
+</html>
