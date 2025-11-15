@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trang Chủ</title>
+<style>
+  /* ======= Reset & cơ bản ======= */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6dd5fa, #ffffff);
+    color: #2b3948;
+  }
+
+  /* ======= Container chính ======= */
+  .container {
+    text-align: center;
+    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    max-width: 400px;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #1c2b3a;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #444;
+  }
+
+  /* ======= Nút link ======= */
+  .btn {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 14px 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    border-radius: 12px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .btn-cv {
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+  }
+
+  .btn-cv:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  .btn-ocean {
+    background: linear-gradient(90deg, #ff758c, #ff7eb3);
+  }
+
+  .btn-ocean:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 30px 20px; }
+    h1 { font-size: 24px; }
+    .btn { font-size: 15px; padding: 12px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Chào mừng bạn!</h1>
+  <p>Chọn nội dung bạn muốn truy cập:</p>
+  
+  <a href="cv.html" class="btn btn-cv">📄 Xem CV</a>
+  <a href="ho_ca.html" class="btn btn-ocean">🌊 Xem Cảnh Biển Động</a>
+</div>
+
+</body>
+</html>

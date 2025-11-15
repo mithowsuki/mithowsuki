@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV - Mai Thanh Thảo</title>
+  <style>
+    :root{
+      --left-w: 40%;
+      --right-w: 60%;
+      --accent: #2b3948;
+      --muted: #77808a;
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --accent-2: #e8eff6;
+      --gap: 20px;
+      --radius: 12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#2b2b2b;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:30px;
+      line-height:1.6;
+    }
+
+    .cv-wrap{
+      max-width:900px;
+      margin:0 auto;
+      display:flex;
+      gap:var(--gap);
+      align-items:flex-start;
+    }
+
+    .left{
+      width:var(--left-w);
+      background:linear-gradient(180deg,var(--accent), #22262b);
+      color:#fff;
+      padding:28px;
+      border-radius:var(--radius);
+      position:relative;
+      min-height:600px;
+      box-shadow:0 8px 20px rgba(15,20,25,0.12);
+      overflow:hidden;
+    }
+
+    .right{
+      width:var(--right-w);
+      background:var(--card);
+      padding:28px;
+      border-radius:var(--radius);
+      box-shadow:0 8px 20px rgba(15,20,25,0.06);
+      min-height:600px;
+    }
+
+    .left::before{
+      content:"★";
+      position:absolute;
+      font-size:160px;
+      opacity:0.06;
+      right:10px;
+      top:-20px;
+      transform:rotate(-15deg);
+    }
+
+    .avatar{
+      width:120px;height:120px;
+      border-radius:50%;
+      overflow:hidden;
+      border:5px solid rgba(255,255,255,0.12);
+      margin-bottom:16px;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    h1{
+      margin:0 0 6px 0;
+      font-size:22px;
+      letter-spacing:1px;
+    }
+    .title{font-size:13px;color:var(--accent-2);text-transform:uppercase;letter-spacing:1px}
+
+    .section{margin-top:22px}
+    .section h3{margin:0 0 12px 0;font-size:13px;color:var(--accent-2);text-transform:uppercase}
+
+    .contact li{list-style:none;margin:8px 0;font-size:14px;color:#eef6fb}
+    .contact li span.icon{width:22px;display:inline-block}
+    .contact li small{display:block;color:rgba(255,255,255,0.75);font-size:12px}
+
+    .skill{margin:8px 0}
+    .skill .bar{background:rgba(255,255,255,0.12);height:8px;border-radius:8px;overflow:hidden}
+    .skill .bar > i{display:block;height:100%;background:#fff;border-radius:8px}
+
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .meta h2{margin:0;font-size:28px;letter-spacing:2px}
+    .meta small{color:var(--muted);text-transform:uppercase}
+
+    .edu, .exp{margin-top:18px}
+    .item{padding:12px;border-left:4px solid var(--accent-2);margin-bottom:12px;background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent);border-radius:6px}
+    .item time{font-weight:700;color:var(--accent)}
+    .item p{margin:8px 0 0 0;color:#333}
+
+    .certs{display:flex;gap:10px;flex-wrap:wrap}
+    .cert{background:var(--accent-2);padding:8px 10px;border-radius:6px;font-size:13px}
+
+    .ref{font-size:14px}
+    .ref b{display:block}
+
+    .hobbies{display:flex;gap:10px;flex-wrap:wrap}
+    .hobby{background:rgba(255,255,255,0.06);padding:8px 10px;border-radius:20px;font-size:13px}
+
+    @media (max-width:880px){
+      .cv-wrap{flex-direction:column}
+      .left,.right{width:100%}
+      .left{order:0}
+    }
+
+    @media print{
+      body{padding:0;background:#fff}
+      .cv-wrap{box-shadow:none}
+      .left::before{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-wrap" role="document">
+    <aside class="left" aria-label="Thông tin cá nhân">
+      <div class="avatar">
+        <img src="imagecv/avt.jpg" alt="Ảnh đại diện">
+      </div>
+      <h1>MAI THANH THẢO</h1>
+      <div class="title">Lớp: 51.01.CNTT.C</div>
+      <div class="title">MSSV: 51.01.104.093</div>
+
+      <div class="section about">
+        <h3>✦ Giới thiệu</h3>
+        <p style="color:rgba(255,255,255,0.9);font-size:14px">
+          Sinh viên Khoa Công nghệ Thông tin, Đại học Sư phạm TP.HCM trọng điểm quốc gia.
+        </p>
+      </div>
+
+      <div class="section contact">
+        <h3>✉️ Liên hệ</h3>
+        <ul style="padding:0;margin:0">
+          <li><span class="icon">📍</span> Hồ Chí Minh <small>Việt Nam</small></li>
+          <li><span class="icon">☎️</span> 0947890739 <small>Điện thoại</small></li>
+          <li><span class="icon">✉️</span> 5101104093@student.hcmue.vn.edu <small>Email</small></li>
+          <li><span class="icon">🔗</span> github.com/mithowsuki <small>Portfolio</small></li>
+        </ul>
+      </div>
+
+      <div class="section skills">
+        <h3>⚙️ Kỹ năng</h3>
+        <div class="skill"><div>HTML / CSS</div><div class="bar" style="margin-top:6px"><i style="width:30%"></i></div></div>
+        <div class="skill"><div>JavaScript</div><div class="bar" style="margin-top:6px"><i style="width:20%"></i></div></div>
+        <div class="skill"><div>React / Vue</div><div class="bar" style="margin-top:6px"><i style="width:15%"></i></div></div>
+        <div class="skill"><div>Photoshop / Figma</div><div class="bar" style="margin-top:6px"><i style="width:25%"></i></div></div>
+      </div>
+
+      <div class="section hobbies">
+        <h3>🎯 Sở thích</h3>
+        <div class="hobbies">
+          <div class="hobby">💻 Lập trình</div>
+          <div class="hobby">🎮 Game</div>
+          <div class="hobby">📚 Đọc sách</div>
+        </div>
+      </div>
+
+      <div class="section ref">
+        <h3>👥 Tham chiếu</h3>
+        <div class="ref">
+          <div><b>Mr. Hien Luong</b></div>
+          <div style="margin-top:8px"><b>Mr. Khiet Luong</b></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="right" aria-label="Kinh nghiệm và học vấn">
+      <div class="meta">
+        <div>
+          <h2>MAI THANH THẢO</h2>
+          <small>Developer</small>
+        </div>
+        <div style="text-align:right;color:var(--muted)">📅 Cập nhật: 2025</div>
+      </div>
+
+      <section class="edu section">
+        <h3>🎓 Học vấn & Chứng chỉ</h3>
+        <div class="certs">
+          <div class="cert">JLPT Tiếng Nhật N4 (2020)</div>
+          <div class="cert">Huy chương Bạc Chuyên Tin Olympic TP.HCM (2024)</div>
+          <div class="cert">Huy chương Bạc Chuyên Tin Cụm 4 TP.HCM (2023)</div>
+        </div>
+      </section>
+
+      <section class="exp section">
+        <h3>💼 Kinh nghiệm</h3>
+        <article class="item">
+          <p>
+            Là sinh viên năm nhất ngành Công nghệ Thông tin, tôi đã tích cực tham gia lập trình thi đấu, rèn luyện tư duy thuật toán và giải quyết vấn đề. Tôi đặc biệt quan tâm đến các lĩnh vực trong Khoa học Máy tính như thuật toán, cấu trúc dữ liệu và tối ưu hóa, và luôn chủ động tự học để mở rộng kiến thức.
+          </p>
+          <p>
+            Ngoài kỹ năng lập trình, tôi thông thạo tiếng Nhật, có tính cách cởi mở, chủ động trong giao tiếp và hợp tác nhóm, sẵn sàng học hỏi để phát triển bản thân và đóng góp vào các dự án thực tế.
+          </p>
+        </article>
+      </section>
+
+      <section class="section">
+        <h3>Mục tiêu nghề nghiệp</h3>
+        <p>
+          Tận dụng cơ hội học tập tại Đại học để nâng cao kiến thức Khoa học Máy tính, phát triển kỹ năng lập trình và tư duy thuật toán, đồng thời tham gia các dự án thực tế và lập trình thi đấu, chuẩn bị nền tảng vững chắc cho sự nghiệp công nghệ.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <!-- Thêm vào cuối body, trước </body> -->
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
+    <a href="main.html" style="
+        display: inline-block;
+        padding: 10px 16px;
+        background: linear-gradient(90deg, #36d1dc, #5b86e5);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    " onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+        ⬅️ Quay lại Trang Chủ
+    </a>
+</div>
+
+</body>
+</html>
